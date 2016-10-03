@@ -10,7 +10,6 @@
     },
     "adminPassword": {
       "type": "securestring",
-      "defaultValue": "",
       "metadata": {
         "description": "Admin password used when provisioning virtual machines"
       }
@@ -348,18 +347,15 @@
       "addressPrefix": "10.0.0.0/16",
       "subnet": {
         "master": {
-          "name": "master",
-          "prefix": "10.0.0.0/24",
+          "name": "parameters('subnet1Name')",
           "vnet": "[variables('vnetID')]"
         },
         "data": {
-          "name": "data",
-          "prefix": "10.0.1.0/24",
+          "name": "parameters('subnet1Name')",
           "vnet": "[variables('vnetID')]"
         },
         "other": {
-          "name": "other",
-          "prefix": "10.0.2.0/24",
+          "name": "parameters('subnet1Name')",
           "vnet": "[variables('vnetID')]"
         }
       }
