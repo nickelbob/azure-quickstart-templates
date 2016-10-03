@@ -68,7 +68,7 @@
   },
   "variables": {
     "vmStorageAccountContainerName": "vhd",
-    "subnetRef": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('subnet').vnet), '/subnets/', parameters('subnet').name)]",
+    "subnetRef": "[concat(parameters('subnet').vnet, '/subnets/', parameters('subnet').name)]",
     "storageAccountName": "[parameters('storageSettings').prefix]",
     "storageAccountNameAFS": "[parameters('storageSettings').afs]",
     "vmName": "[concat(parameters('namespace'), '-vm')]"
