@@ -20,7 +20,7 @@
         "description": "Storage Account Settings"
       }
     },
-    "subnets": {
+    "subnet": {
       "type": "object",
       "metadata": {
         "description": "The VNET and Subnet to deploy the nodes in to"
