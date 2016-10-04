@@ -347,15 +347,15 @@
       "addressPrefix": "10.0.0.0/16",
       "subnet": {
         "master": {
-          "name": "parameters('subnet1Name')",
+          "name": "[parameters('subnet1Name')]",
           "vnet": "[variables('vnetID')]"
         },
         "data": {
-          "name": "parameters('subnet1Name')",
+          "name": "[parameters('subnet1Name')]",
           "vnet": "[variables('vnetID')]"
         },
         "other": {
-          "name": "parameters('subnet1Name')",
+          "name": "[parameters('subnet1Name')]",
           "vnet": "[variables('vnetID')]"
         }
       }
