@@ -81,20 +81,20 @@
       "kind": "Storage",
       "location": "[resourceGroup().location]"
     },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[concat(variables('storageAccountName'), copyindex(1))]",
-      "apiVersion": "2016-01-01",
-      "sku": {
-        "name": "[parameters('storageSettings').accountType]"
-      },
-      "kind": "Storage",
-      "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "storageLoop",
-        "count": "[parameters('storageSettings').count]"
-      }
-    },
+    // {
+    //   "type": "Microsoft.Storage/storageAccounts",
+    //   "name": "[concat(variables('storageAccountName'), copyindex(1))]",
+    //   "apiVersion": "2016-01-01",
+    //   "sku": {
+    //     "name": "[parameters('storageSettings').accountType]"
+    //   },
+    //   "kind": "Storage",
+    //   "location": "[resourceGroup().location]",
+    //   "copy": {
+    //     "name": "storageLoop",
+    //     "count": "[parameters('storageSettings').count]"
+    //   }
+    // },
     // {
     //   "apiVersion": "2016-03-30",
     //   "type": "Microsoft.Network/publicIPAddresses",

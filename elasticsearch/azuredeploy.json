@@ -161,10 +161,10 @@
     },
     "mastersAreData": {
       "type": "string",
-      "defaultValue": "no",
+      "defaultValue": "No",
       "allowedValues": [
-        "yes",
-        "no"
+        "Yes",
+        "No"
       ],
       "metadata": {
         "description": "Are the master nodes also data nodes?"
@@ -389,7 +389,6 @@
       "discoveryHosts": "[concat(variables('masterNodesIpPrefix'), '-3')]",
       "marvelHosts": "[concat(variables('marvelNodesIpPrefix'), '-3')]"
     },
-    "sharedTemplateFileName": "shared-resources.json",
     "masterTemplateFileName": "master-nodes-resources.json",
     "marvelTemplates": {
       "yes": "marvel-nodes-resources.json",
@@ -419,6 +418,10 @@
     "jumpboxTemplateYes": "jumpbox-resources.json",
     "jumpboxTemplateNo": "empty-resources.json",
     "jumpboxTemplateFileName": "[variables(concat('jumpboxTemplate', parameters('jumpbox')))]",
+    "mastersAreDataTemplateYes": "shared-mastersAreData-resources.json",
+    "mastersAreDataTemplateNo": "shared-resources.json",
+    "mastersAreDataTemplateFileName": "[variables(concat('mastersAreDataTemplate', parameters('mastersAreData')))]",
+    "sharedTemplateFileName": "[variables('mastersAreDataTemplateFileName')]",
     "senseParam": {
       "yes": " -s ",
       "no": ""
@@ -478,8 +481,8 @@
       "no": ""
     },
     "mastersAreDataParam": {
-      "yes": "",
-      "no": "-x"
+      "Yes": "",
+      "No": "-x"
     },
     "cloudAzureParamValue": "[variables('cloudAzureParam')[parameters('cloudAzure')]]",
     "marvelExportParamValue": "[variables('marvelExportParam')[parameters('OS')][parameters('marvelCluster')]]",
