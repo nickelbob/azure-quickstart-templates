@@ -92,7 +92,8 @@
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "storageLoop",
-        "count": "[parameters('storageSettings').count]"
+        "count": 0
+        // "count": "[parameters('storageSettings').count]"
       }
     },
     // {
