@@ -51,7 +51,7 @@
         "Name": "LBFE",
         "Properties": {
           "subnet": {
-            "Id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('networkSettings').virtualNetworkName), '/subnets/', parameters('networkSettings').subnet.other.name)]"
+            "Id": "[concat(parameters('networkSettings').subnet.other.vnet, '/subnets/', parameters('networkSettings').subnet.other.name)]"
           },
           "privateIPAddress": "[parameters('ilbIpAddress')]",
           "privateIPAllocationMethod": "Static"
