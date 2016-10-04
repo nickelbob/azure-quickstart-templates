@@ -333,8 +333,8 @@
     "storageAccountPrefix": "[concat(substring(uniqueString(resourceGroup().id, parameters('esClusterName')), 0, 6), substring(parameters('esClusterName'), 0, 3))]",
     "storageAccountNameAFS": "[concat(variables('storageAccountPrefix'), 'afs')]",
     "storageAccountNameShared": "[concat(variables('storageAccountPrefix'), 'sh')]",
-    "masterNodesIpPrefix": "10.5.11.101",
-    "marvelNodesIpPrefix": "10.5.11.102",
+    "masterNodesIpPrefix": "10.5.11.11",
+    "marvelNodesIpPrefix": "10.5.11.12",
     "kibanaIPPrefix": {
       "yes": "[variables('marvelNodesIpPrefix')]",
       "no": "[variables('masterNodesIpPrefix')]"
