@@ -26,8 +26,7 @@
       "defaultValue": "ubuntu",
       "allowedValues": [
         "ubuntu",
-        "centos",
-        "windows"
+        "centos"
       ],
       "metadata": {
         "description": "The operating system to deploy Elasticsearch cluster on"
@@ -160,6 +159,17 @@
         "description": "Size of the Elasticsearch data nodes"
       }
     },
+    "mastersAreData": {
+      "type": "string",
+      "defaultValue": "no",
+      "allowedValues": [
+        "yes",
+        "no"
+      ],
+      "metadata": {
+        "description": "Are the master nodes also data nodes?"
+      }
+    },
     "vmDataNodeCount": {
       "type": "int",
       "defaultValue": 3,
@@ -176,8 +186,9 @@
     },
     "esVersion": {
       "type": "string",
-      "defaultValue": "2.3.1",
+      "defaultValue": "2.4.1",
       "allowedValues": [
+        "2.4.1",
         "2.3.1",
         "2.2.2",
         "2.1.2",
@@ -266,6 +277,17 @@
       ],
       "metadata": {
         "description": "Install the JMeter Server Agent on each node (Ubuntu only)"
+      }
+    },
+    "shield": {
+      "type": "string",
+      "defaultValue": "no",
+      "allowedValues": [
+        "yes",
+        "no"
+      ],
+      "metadata": {
+        "description": "Install Shield on each node (Ubuntu only)"
       }
     },
     "cloudAzure": {
@@ -447,15 +469,24 @@
       "yes": " -j ",
       "no": ""
     },
+    "shieldParam": {
+      "yes": " -b ",
+      "no": ""
+    },
     "cloudAzureParam": {
       "yes": "[concat(' -po ', parameters('cloudAzureStorageAccount'), ' -r ', parameters('cloudAzureStorageKey'), ' ')]",
       "no": ""
+    },
+    "mastersAreDataParam": {
+      "yes": "",
+      "no": "-x"
     },
     "cloudAzureParamValue": "[variables('cloudAzureParam')[parameters('cloudAzure')]]",
     "marvelExportParamValue": "[variables('marvelExportParam')[parameters('OS')][parameters('marvelCluster')]]",
     "senseParamValue": "[variables('senseParam')[parameters('sense')]]",
     "marvelParamValue": "[variables('marvelParam')[parameters('OS')][parameters('marvel')]]",
     "jmeterParamValue": "[variables('jmeterParam')[parameters('jmeterAgent')]]",
+    "shieldParamValue": "[variables('shieldParam')[parameters('shield')]]",
     "afsParamValue": "[variables('afsParam')[parameters('OS')][parameters('afs')]]",
     "kibanaTemplates": {
       "yes": "kibana-resources.json",
@@ -522,7 +553,7 @@
           "typeHandlerVersion": "2.0",
           "settings": {
             "fileUris": "[variables('ubuntuScripts')]",
-            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -xn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh ', variables('mastersAreDataParam'), ' -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
           }
         },
         "client": {
@@ -532,7 +563,7 @@
           "autoUpgradeMinorVersion": true,
           "settings": {
             "fileUris": "[variables('ubuntuScripts')]",
-            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -yn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -yn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
           }
         },
         "data": {
@@ -541,7 +572,7 @@
           "typeHandlerVersion": "2.0",
           "settings": {
             "fileUris": "[variables('ubuntuScripts')]",
-            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -zn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -zn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
           }
         },
         "kibana": {
@@ -583,7 +614,7 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "fileUris": "[variables('centosScripts')]",
-              "commandToExecute": "[concat('bash elasticsearch-centos-install.sh -xn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+              "commandToExecute": "[concat('bash elasticsearch-centos-install.sh ', variables('mastersAreDataParam'), ' -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
             }
           },
         "client": {

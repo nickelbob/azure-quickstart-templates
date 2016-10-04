@@ -43,6 +43,7 @@ help()
     echo "-s used striped data disk volumes"
     echo "-j install jmeter server agent"
     echo "-p install the cloud-azure plugin"
+    echo "-b install the shield plugin"
     echo "-o storage account (for cloud-azure)"
     echo "-r storage key (for cloud-azure)"
     echo "-h view this help content"
@@ -84,6 +85,7 @@ ES_VERSION="2.0.0"
 MARVEL_ONLY_NODE=0
 DISCOVERY_ENDPOINTS=""
 INSTALL_MARVEL=0
+INSTALL_SHIELD=0
 CLIENT_ONLY_NODE=0
 DATA_NODE=0
 MASTER_ONLY_NODE=0
@@ -142,6 +144,9 @@ while getopts :n:d:v:a:k:cme:o:r:pwxyzsjh optname; do
       ;;
     j) #install jmeter server agent
       JMETER_AGENT=1
+      ;;
+    b) #install shield
+      INSTALL_SHIELD=1
       ;;
     p) #install cloud-azure plugin
       INSTALL_CLOUD_AZURE=1
@@ -425,6 +430,16 @@ if [ ${INSTALL_MARVEL} -ne 0 ]; then
         /usr/share/elasticsearch/bin/plugin -i elasticsearch/marvel/1.3.1
     fi
 fi
+
+#Optionally Install Shield
+if [ ${INSTALL_SHIELD} -ne 0 ]; then
+    log "Installing Shield Plugin"
+    if [[ "${ES_VERSION}" == \2* ]]; then
+        /usr/share/elasticsearch/bin/plugin install license
+        /usr/share/elasticsearch/bin/plugin install shield
+    fi
+fi
+
 
 # install the cloud-azure plugin
 if [ ${INSTALL_CLOUD_AZURE} -ne 0 ]; then

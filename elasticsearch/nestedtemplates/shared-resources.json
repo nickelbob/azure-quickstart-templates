@@ -95,15 +95,15 @@
         "count": "[parameters('storageSettings').count]"
       }
     },
-    {
-      "apiVersion": "2016-03-30",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "public-ip",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "publicIPAllocationMethod": "Static"
-      }
-    },
+    // {
+    //   "apiVersion": "2016-03-30",
+    //   "type": "Microsoft.Network/publicIPAddresses",
+    //   "name": "public-ip",
+    //   "location": "[resourceGroup().location]",
+    //   "properties": {
+    //     "publicIPAllocationMethod": "Static"
+    //   }
+    // },
     // {
     //   "apiVersion": "2016-03-30",
     //   "type": "Microsoft.Network/virtualNetworks",
@@ -146,70 +146,70 @@
     //     "addressPrefix": "[parameters('networkSettings').subnet.master.prefix]"
     //   }
     // },
-    {
-      "apiVersion": "2016-03-30",
-      "name": "es-load-balancer",
-      "type": "Microsoft.Network/loadBalancers",
-      "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', 'public-ip')]"
-      ],
-      "properties": {
-        "frontendIPConfigurations": "[variables('feLoadBalancerConfig')]",
-        "backendAddressPools": [
-          {
-            "name": "LBBE"
-          }
-        ],
-        "loadBalancingRules": [
-          {
-            "name": "es-http-rule",
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/frontendIPConfigurations/LBFE')]"
-              },
-              "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/backendAddressPools/LBBE')]"
-              },
-              "protocol": "Tcp",
-              "frontendPort": 9200,
-              "backendPort": 9200,
-              "enableFloatingIP": false,
-              "idleTimeoutInMinutes": 5,
-              "probe": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/probes/es-tcp-probe')]"
-              }
-            }
-          },
-          {
-            "name": "es-tcp-rule",
-            "properties": {
-              "frontendIPConfiguration": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/frontendIPConfigurations/LBFE')]"
-              },
-              "backendAddressPool": {
-                "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/backendAddressPools/LBBE')]"
-              },
-              "protocol": "Tcp",
-              "frontendPort": 9300,
-              "backendPort": 9300,
-              "enableFloatingIP": false,
-              "idleTimeoutInMinutes": 5
-            }
-          }
-        ],
-        "probes": [
-          {
-            "name": "es-tcp-probe",
-            "properties": {
-              "protocol": "Tcp",
-              "port": 9200,
-              "intervalInSeconds": 30,
-              "numberOfProbes": 3
-            }
-          }
-        ]
-      }
-    }
+    // {
+    //   "apiVersion": "2016-03-30",
+    //   "name": "es-load-balancer",
+    //   "type": "Microsoft.Network/loadBalancers",
+    //   "location": "[resourceGroup().location]",
+    //   "dependsOn": [
+    //     "[resourceId('Microsoft.Network/publicIPAddresses', 'public-ip')]"
+    //   ],
+    //   "properties": {
+    //     "frontendIPConfigurations": "[variables('feLoadBalancerConfig')]",
+    //     "backendAddressPools": [
+    //       {
+    //         "name": "LBBE"
+    //       }
+    //     ],
+    //     "loadBalancingRules": [
+    //       {
+    //         "name": "es-http-rule",
+    //         "properties": {
+    //           "frontendIPConfiguration": {
+    //             "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/frontendIPConfigurations/LBFE')]"
+    //           },
+    //           "backendAddressPool": {
+    //             "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/backendAddressPools/LBBE')]"
+    //           },
+    //           "protocol": "Tcp",
+    //           "frontendPort": 9200,
+    //           "backendPort": 9200,
+    //           "enableFloatingIP": false,
+    //           "idleTimeoutInMinutes": 5,
+    //           "probe": {
+    //             "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/probes/es-tcp-probe')]"
+    //           }
+    //         }
+    //       },
+    //       {
+    //         "name": "es-tcp-rule",
+    //         "properties": {
+    //           "frontendIPConfiguration": {
+    //             "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/frontendIPConfigurations/LBFE')]"
+    //           },
+    //           "backendAddressPool": {
+    //             "id": "[concat(resourceId('Microsoft.Network/loadBalancers', 'es-load-balancer'), '/backendAddressPools/LBBE')]"
+    //           },
+    //           "protocol": "Tcp",
+    //           "frontendPort": 9300,
+    //           "backendPort": 9300,
+    //           "enableFloatingIP": false,
+    //           "idleTimeoutInMinutes": 5
+    //         }
+    //       }
+    //     ],
+    //     "probes": [
+    //       {
+    //         "name": "es-tcp-probe",
+    //         "properties": {
+    //           "protocol": "Tcp",
+    //           "port": 9200,
+    //           "intervalInSeconds": 30,
+    //           "numberOfProbes": 3
+    //         }
+    //       }
+    //     ]
+    //   }
+    // }
   ]
 }
