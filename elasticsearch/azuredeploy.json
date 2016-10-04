@@ -487,6 +487,7 @@
     "marvelParamValue": "[variables('marvelParam')[parameters('OS')][parameters('marvel')]]",
     "jmeterParamValue": "[variables('jmeterParam')[parameters('jmeterAgent')]]",
     "shieldParamValue": "[variables('shieldParam')[parameters('shield')]]",
+    "mastersAreDataParamValue": "[variables('mastersAreDataParam')[parameters('mastersAreData')]]",
     "afsParamValue": "[variables('afsParam')[parameters('OS')][parameters('afs')]]",
     "kibanaTemplates": {
       "yes": "kibana-resources.json",
@@ -553,7 +554,7 @@
           "typeHandlerVersion": "2.0",
           "settings": {
             "fileUris": "[variables('ubuntuScripts')]",
-            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh ', variables('mastersAreDataParam'), ' -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh ', variables('mastersAreDataParamValue'), ' -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
           }
         },
         "client": {
@@ -614,7 +615,7 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "fileUris": "[variables('centosScripts')]",
-              "commandToExecute": "[concat('bash elasticsearch-centos-install.sh ', variables('mastersAreDataParam'), ' -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+              "commandToExecute": "[concat('bash elasticsearch-centos-install.sh ', variables('mastersAreDataParamValue'), ' -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
             }
           },
         "client": {
