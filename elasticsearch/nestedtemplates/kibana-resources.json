@@ -176,7 +176,7 @@
       ]
     }
   ],
-  "outputs": {
+  // "outputs": {
   //   "kibana-url": {
   //     "type": "string",
   //     "value": "[concat('http://', reference(resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))).ipAddress, ':5601')]"
