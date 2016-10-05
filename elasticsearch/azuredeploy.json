@@ -421,7 +421,8 @@
     "mastersAreDataTemplateYes": "shared-mastersAreData-resources.json",
     "mastersAreDataTemplateNo": "shared-resources.json",
     "mastersAreDataTemplateFileName": "[variables(concat('mastersAreDataTemplate', parameters('mastersAreData')))]",
-    "sharedTemplateFileName": "[variables('mastersAreDataTemplateFileName')]",
+    // "sharedTemplateFileName": "[variables('mastersAreDataTemplateFileName')]",
+    "sharedTemplateFileName": "shared-resources.json",
     "senseParam": {
       "yes": " -s ",
       "no": ""
