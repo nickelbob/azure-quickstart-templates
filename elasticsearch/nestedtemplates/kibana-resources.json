@@ -44,7 +44,7 @@
     "vmSize": "Standard_A1",
     "subnetRef": "[concat(parameters('subnet').vnet, '/subnets/', parameters('subnet').name)]",
     "vmName": "[concat(parameters('namespace'), '-vm')]",
-    "publicIpName": "[concat(parameters('namespace'), '-pip')]",
+    // "publicIpName": "[concat(parameters('namespace'), '-pip')]",
     "securityGroupName": "[concat(parameters('namespace'), '-nsg')]",
     "nicName": "[concat(parameters('namespace'), '-nic')]"
   },
@@ -102,7 +102,7 @@
       "name": "[variables('nicName')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]",
+        // "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]",
         "[resourceId('Microsoft.Network/networkSecurityGroups', variables('securityGroupName'))]"
       ],
       "properties": {
@@ -111,9 +111,9 @@
             "name": "ipconfig1",
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
-              "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]"
-              },
+              // "publicIPAddress": {
+              //   "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpName'))]"
+              // },
               "subnet": {
                 "id": "[variables('subnetRef')]"
               },
