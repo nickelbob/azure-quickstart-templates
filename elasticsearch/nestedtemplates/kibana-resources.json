@@ -175,7 +175,7 @@
         }
       ]
     }
-  ],
+  ]
   // "outputs": {
   //   "kibana-url": {
   //     "type": "string",
