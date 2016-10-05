@@ -94,7 +94,7 @@
               "subnet": {
                 "id": "[variables('subnetRef')]"
               },
-              "loadBalancerBackendAddressPools": "[parameters('lbBackendPools').backendPools]"
+              // "loadBalancerBackendAddressPools": "[parameters('lbBackendPools').backendPools]"
             }
           }
         ]

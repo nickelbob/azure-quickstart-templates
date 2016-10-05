@@ -355,8 +355,8 @@
     "storageAccountPrefix": "[concat(substring(uniqueString(resourceGroup().id, parameters('esClusterName')), 0, 6), substring(parameters('esClusterName'), 0, 3))]",
     "storageAccountNameAFS": "[concat(variables('storageAccountPrefix'), 'afs')]",
     "storageAccountNameShared": "[concat(variables('storageAccountPrefix'), 'sh')]",
-    "masterNodesIpPrefix": "10.5.11.11",
-    "marvelNodesIpPrefix": "10.5.11.12",
+    "masterNodesIpPrefix": "10.5.11.12",
+    "marvelNodesIpPrefix": "10.5.11.13",
     "kibanaIPPrefix": {
       "yes": "[variables('marvelNodesIpPrefix')]",
       "no": "[variables('masterNodesIpPrefix')]"
@@ -892,47 +892,47 @@
         }
       }
     },
-    {
-      "name": "marvel-nodes",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'shared')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolderName'), '/', variables('marvelTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "storageAccountName": {
-            "value": "[variables('storageAccountNameShared')]"
-          },
-          "adminUsername": {
-            "value": "[parameters('adminUsername')]"
-          },
-          "authSet": {
-            "value": "[variables('authSet')]"
-          },
-          "marvelNodesIpPrefix": {
-            "value": "[variables('marvelNodesIpPrefix')]"
-          },
-          "vmSize": {
-            "value": "[parameters('vmSizeMarvelNodes')]"
-          },
-          "subnet": {
-            "value": "[variables('networkSettings').subnet.other]"
-          },
-          "osSettings": {
-            "value": "[variables('osSettings')]"
-          },
-          "namespace": {
-            "value": "[concat(parameters('esClusterName'), '-marvel')]"
-          }
-        }
-      }
-    },
+    // {
+    //   "name": "marvel-nodes",
+    //   "type": "Microsoft.Resources/deployments",
+    //   "apiVersion": "2015-01-01",
+    //   "dependsOn": [
+    //     "[resourceId('Microsoft.Resources/deployments', 'shared')]"
+    //   ],
+    //   "properties": {
+    //     "mode": "Incremental",
+    //     "templateLink": {
+    //       "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolderName'), '/', variables('marvelTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+    //       "contentVersion": "1.0.0.0"
+    //     },
+    //     "parameters": {
+    //       "storageAccountName": {
+    //         "value": "[variables('storageAccountNameShared')]"
+    //       },
+    //       "adminUsername": {
+    //         "value": "[parameters('adminUsername')]"
+    //       },
+    //       "authSet": {
+    //         "value": "[variables('authSet')]"
+    //       },
+    //       "marvelNodesIpPrefix": {
+    //         "value": "[variables('marvelNodesIpPrefix')]"
+    //       },
+    //       "vmSize": {
+    //         "value": "[parameters('vmSizeMarvelNodes')]"
+    //       },
+    //       "subnet": {
+    //         "value": "[variables('networkSettings').subnet.other]"
+    //       },
+    //       "osSettings": {
+    //         "value": "[variables('osSettings')]"
+    //       },
+    //       "namespace": {
+    //         "value": "[concat(parameters('esClusterName'), '-marvel')]"
+    //       }
+    //     }
+    //   }
+    // },
     {
       "name": "shared",
       "type": "Microsoft.Resources/deployments",
@@ -959,50 +959,50 @@
         }
       }
     },
-    {
-      "name": "client-nodes",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'shared')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolderName'), '/', variables('clientTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "adminUsername": {
-            "value": "[parameters('adminUsername')]"
-          },
-          "authSet": {
-            "value": "[variables('authSet')]"
-          },
-          "storageSettings": {
-            "value": "[variables('dataNodeStorageSettings')]"
-          },
-          "subnet": {
-            "value": "[variables('networkSettings').subnet.other]"
-          },
-          "vmSize": {
-            "value": "[parameters('vmSizeClientNodes')]"
-          },
-          "osSettings": {
-            "value": "[variables('osSettings')]"
-          },
-          "vmCount": {
-            "value": "[parameters('vmClientNodeCount')]"
-          },
-          "lbBackendPools": {
-            "value": "[variables('lbBackEndPoolsAdded')]"
-          },
-          "namespace": {
-            "value": "[concat(parameters('esClusterName'), '-client')]"
-          }
-        }
-      }
-    },
+    // {
+    //   "name": "client-nodes",
+    //   "type": "Microsoft.Resources/deployments",
+    //   "apiVersion": "2015-01-01",
+    //   "dependsOn": [
+    //     "[resourceId('Microsoft.Resources/deployments', 'shared')]"
+    //   ],
+    //   "properties": {
+    //     "mode": "Incremental",
+    //     "templateLink": {
+    //       "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolderName'), '/', variables('clientTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+    //       "contentVersion": "1.0.0.0"
+    //     },
+    //     "parameters": {
+    //       "adminUsername": {
+    //         "value": "[parameters('adminUsername')]"
+    //       },
+    //       "authSet": {
+    //         "value": "[variables('authSet')]"
+    //       },
+    //       "storageSettings": {
+    //         "value": "[variables('dataNodeStorageSettings')]"
+    //       },
+    //       "subnet": {
+    //         "value": "[variables('networkSettings').subnet.other]"
+    //       },
+    //       "vmSize": {
+    //         "value": "[parameters('vmSizeClientNodes')]"
+    //       },
+    //       "osSettings": {
+    //         "value": "[variables('osSettings')]"
+    //       },
+    //       "vmCount": {
+    //         "value": "[parameters('vmClientNodeCount')]"
+    //       },
+    //       "lbBackendPools": {
+    //         "value": "[variables('lbBackEndPoolsAdded')]"
+    //       },
+    //       "namespace": {
+    //         "value": "[concat(parameters('esClusterName'), '-client')]"
+    //       }
+    //     }
+    //   }
+    // },
     {
       "name": "data-nodes",
       "type": "Microsoft.Resources/deployments",
@@ -1047,41 +1047,41 @@
         }
       }
     },
-    {
-      "name": "jumpbox",
-      "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'shared')]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolderName'), '/', variables('jumpboxTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "storageAccountName": {
-            "value": "[variables('storageAccountNameShared')]"
-          },
-          "adminUsername": {
-            "value": "[parameters('adminUsername')]"
-          },
-          "authSet": {
-            "value": "[variables('authSet')]"
-          },
-          "subnet": {
-            "value": "[variables('networkSettings').subnet.other]"
-          },
-          "osSettings": {
-            "value": "[variables('osSettings')]"
-          },
-          "namespace": {
-            "value": "[concat(parameters('esClusterName'), '-jumpbox')]"
-          }
-        }
-      }
-    },
+    // {
+    //   "name": "jumpbox",
+    //   "type": "Microsoft.Resources/deployments",
+    //   "apiVersion": "2015-01-01",
+    //   "dependsOn": [
+    //     "[resourceId('Microsoft.Resources/deployments', 'shared')]"
+    //   ],
+    //   "properties": {
+    //     "mode": "Incremental",
+    //     "templateLink": {
+    //       "uri": "[concat(parameters('_artifactsLocation'), '/', variables('nestedTemplatesFolderName'), '/', variables('jumpboxTemplateFileName'), parameters('_artifactsLocationSasToken'))]",
+    //       "contentVersion": "1.0.0.0"
+    //     },
+    //     "parameters": {
+    //       "storageAccountName": {
+    //         "value": "[variables('storageAccountNameShared')]"
+    //       },
+    //       "adminUsername": {
+    //         "value": "[parameters('adminUsername')]"
+    //       },
+    //       "authSet": {
+    //         "value": "[variables('authSet')]"
+    //       },
+    //       "subnet": {
+    //         "value": "[variables('networkSettings').subnet.other]"
+    //       },
+    //       "osSettings": {
+    //         "value": "[variables('osSettings')]"
+    //       },
+    //       "namespace": {
+    //         "value": "[concat(parameters('esClusterName'), '-jumpbox')]"
+    //       }
+    //     }
+    //   }
+    // },
     {
       "name": "kibana",
       "type": "Microsoft.Resources/deployments",
