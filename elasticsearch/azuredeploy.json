@@ -355,8 +355,8 @@
     "storageAccountPrefix": "[concat(substring(uniqueString(resourceGroup().id, parameters('esClusterName')), 0, 6), substring(parameters('esClusterName'), 0, 3))]",
     "storageAccountNameAFS": "[concat(variables('storageAccountPrefix'), 'afs')]",
     "storageAccountNameShared": "[concat(variables('storageAccountPrefix'), 'sh')]",
-    "masterNodesIpPrefix": "10.5.11.12",
-    "marvelNodesIpPrefix": "10.5.11.13",
+    "masterNodesIpPrefix": "10.5.11.14",
+    "marvelNodesIpPrefix": "10.5.11.15",
     "kibanaIPPrefix": {
       "yes": "[variables('marvelNodesIpPrefix')]",
       "no": "[variables('masterNodesIpPrefix')]"
@@ -577,7 +577,7 @@
           "typeHandlerVersion": "2.0",
           "settings": {
             "fileUris": "[variables('ubuntuScripts')]",
-            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -zn ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
+            "commandToExecute": "[concat('bash elasticsearch-ubuntu-install.sh -n ', variables('esSettings').clusterName, ' -v ', variables('esSettings').version, ' -d ', variables('esSettings').discoveryHosts, variables('marvelParamValue'), variables('jmeterParamValue'), variables('shieldParamValue'), variables('cloudAzureParamValue'), variables('marvelExportParamValue'), variables('afsParamValue'))]"
           }
         },
         "kibana": {
